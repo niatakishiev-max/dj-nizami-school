@@ -38,6 +38,9 @@ document.querySelectorAll('.equipment-card').forEach((card) => card.addEventList
   dialog.showModal();
 }));
 dialogClose.addEventListener('click', () => dialog.close());
+dialog.addEventListener('click', (event) => {
+  if (event.target === dialog) dialog.close();
+});
 
 const form = document.querySelector('#request-form');
 const status = form.querySelector('.form-status');
