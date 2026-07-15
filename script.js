@@ -16,6 +16,25 @@ directions.forEach((item) => {
   }
 });
 
+const mobileVideoDirections = document.querySelectorAll('.direction.has-video');
+const mobileDirectionsQuery = window.matchMedia('(max-width: 800px)');
+let mobileVideoObserver;
+
+const updateMobileVideoObserver = () => {
+  mobileVideoObserver?.disconnect();
+  if (!mobileDirectionsQuery.matches) return;
+
+  mobileVideoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) setActiveDirection(entry.target);
+    });
+  }, { rootMargin: '-30% 0px -35% 0px', threshold: 0.05 });
+
+  mobileVideoDirections.forEach((item) => mobileVideoObserver.observe(item));
+};
+
+updateMobileVideoObserver();
+mobileDirectionsQuery.addEventListener('change', updateMobileVideoObserver);
 const faqItems = document.querySelectorAll('.faq details');
 if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   faqItems.forEach((item) => item.addEventListener('mouseenter', () => {
