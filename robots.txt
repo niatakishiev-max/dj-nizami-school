@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://djnizami.ru/sitemap.xml
