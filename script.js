@@ -8,9 +8,21 @@ const setActiveDirection = (item) => {
   });
 };
 
+const openDirection = (item) => {
+  item.classList.add('is-active');
+  item.querySelector('.direction-toggle').setAttribute('aria-expanded', 'true');
+};
+
 directions.forEach((item) => {
   const button = item.querySelector('.direction-toggle');
-  button.addEventListener('click', () => setActiveDirection(item));
+  button.addEventListener('click', () => {
+    if (mobileDirectionsQuery.matches) {
+      const isOpen = item.classList.toggle('is-active');
+      button.setAttribute('aria-expanded', String(isOpen));
+      return;
+    }
+    setActiveDirection(item);
+  });
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     item.addEventListener('mouseenter', () => setActiveDirection(item));
   }
@@ -26,7 +38,7 @@ const updateMobileDirectionsObserver = () => {
 
   mobileDirectionsObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) setActiveDirection(entry.target);
+      if (entry.isIntersecting) openDirection(entry.target);
     });
   }, { rootMargin: '-30% 0px -35% 0px', threshold: 0.05 });
 
