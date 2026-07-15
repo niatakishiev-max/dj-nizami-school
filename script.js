@@ -23,19 +23,18 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   }));
 }
 const devices = {
-  technics: ['Виниловые проигрыватели', 'Technics SL-1200', 'Классический проигрыватель. Золотой стандарт для виниловых диджеев.', 'На занятиях: подготовка проигрывателя, базовая работа с винилом, сведение и практика скретча.'],
-  'vestax-deck': ['Виниловые проигрыватели', 'Vestax PDX-2000', 'Проигрыватель, специально разработанный для тёрнтейблизма. Оснащён Ultra Pitch, который даёт максимальный контроль над пластинкой.', 'На занятиях: контроль движения пластинки, постановка кью и техника для тёрнтейблизма.'],
-  z2: ['Микшер и DVS', 'Traktor Kontrol Z2', 'Микшер для практики классического DJ-подхода и цифрового управления библиотекой.', 'На занятиях: кроссфейдер, эквализация, работа с DVS, эффектами и лупами, построение переходов.'],
-  pmc: ['DJ-микшер', 'Vestax PMC-06', 'Классический скретч-микшер, на котором можно познакомиться с историей и базовыми приёмами работы с фейдером.', 'На занятиях: уверенный контроль каналов, эквализации и кроссфейдера.']
+  technics: ['Виниловые проигрыватели', 'Technics SL-1200', 'Классический проигрыватель. Золотой стандарт для виниловых диджеев.'],
+  'vestax-deck': ['Виниловые проигрыватели', 'Vestax PDX-2000', 'Проигрыватель, специально разработанный для тёрнтейблизма. Оснащён Ultra Pitch, который даёт максимальный контроль над пластинкой.'],
+  z2: ['Микшер и DVS', 'Traktor Kontrol Z2', 'Микшер для практики классического DJ-подхода и цифрового управления библиотекой.'],
+  pmc: ['DJ-микшер', 'Vestax PMC-06', 'Классический скретч-микшер, на котором можно познакомиться с историей и базовыми приёмами работы с фейдером.']
 };
 const dialog = document.querySelector('#device-dialog');
 const dialogClose = dialog.querySelector('.dialog-close');
 document.querySelectorAll('.equipment-card').forEach((card) => card.addEventListener('click', () => {
-  const [kicker, title, text, skills] = devices[card.dataset.device];
+  const [kicker, title, text] = devices[card.dataset.device];
   document.querySelector('#dialog-kicker').textContent = kicker;
   document.querySelector('#dialog-title').textContent = title;
   document.querySelector('#dialog-text').textContent = text;
-  document.querySelector('#dialog-skills').textContent = skills;
   dialog.showModal();
 }));
 dialogClose.addEventListener('click', () => dialog.close());
