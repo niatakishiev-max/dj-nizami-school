@@ -102,7 +102,7 @@ footer { min-height:96px; display:flex; flex-wrap:wrap; align-items:center; gap:
 }
 @media (max-width:800px) {
   .directions .section-heading .eyebrow { font-size:15px; }
-  .directions .section-heading h2 { font-size:46px; }
-  .directions .direction-en { font-size:32px; }
-  .directions .direction-ru { font-size:40px; line-height:1.08; }
+  .directions .section-heading h2 { font-size:31px; }
+  .directions .direction-en { font-size:21px; }
+  .directions .direction-ru { font-size:27px; line-height:1.08; }
 }
