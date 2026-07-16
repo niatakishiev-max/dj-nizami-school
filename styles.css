@@ -116,3 +116,7 @@ footer { min-height:96px; display:flex; flex-wrap:wrap; align-items:center; gap:
 .privacy-page p { max-width:760px; color:#272724; }
 .privacy-date { color:var(--muted)!important; font-size:14px; }
 .privacy-back { color:var(--accent); font-weight:700; }
+/* Header logo keeps its native proportions on mobile browsers. */
+.site-header .brand { display:block; width:425px; height:auto; aspect-ratio:3839 / 1896; }
+.site-header .brand img { display:block; width:100%; height:auto; max-width:100%; object-fit:initial; object-position:initial; }
+@media (max-width:800px) { .site-header .brand { width:245px; height:auto; } }
