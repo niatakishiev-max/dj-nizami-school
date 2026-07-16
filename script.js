@@ -73,20 +73,6 @@ dialog.addEventListener('click', (event) => {
   if (event.target === dialog) dialog.close();
 });
 
-const form = document.querySelector('#request-form');
-const status = form.querySelector('.form-status');
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const phone = form.elements.phone.value.trim();
-  const validPhone = /^[+0-9()\s-]{7,}$/.test(phone);
-  if (!form.elements.name.value.trim() || !validPhone || !form.elements.consent.checked) {
-    status.textContent = 'Проверьте имя, номер телефона и согласие на обработку данных.';
-    status.className = 'form-status is-error';
-    return;
-  }
-  status.textContent = 'Форма готова. Подключите безопасную отправку заявок перед публикацией.';
-  status.className = 'form-status';
-});
 const revealItems = document.querySelectorAll('.section, .hero-portrait, .equipment-card');
 const observer = new IntersectionObserver((entries) => { entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.12 });
 revealItems.forEach((item) => observer.observe(item));
