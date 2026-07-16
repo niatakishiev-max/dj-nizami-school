@@ -105,10 +105,10 @@ footer { min-height:96px; display:flex; flex-wrap:wrap; align-items:center; gap:
   .directions .direction-en { font-size:21px; }
   .directions .direction-ru { font-size:27px; line-height:1.08; }
 }
-/* Keep typography local: no external font request is made when the site opens. */
-body { font-family: Arial, Helvetica, sans-serif; }
-.eyebrow, .socials, footer, .hero-portrait figcaption { font-family: "Courier New", Courier, monospace; }
-.hero h1, .section h2, .intro h2, .teacher h2, .request h2, .direction-ru, .direction-en { font-family: "Arial Narrow", Arial, sans-serif; }
+@font-face { font-family: "Manrope"; src: url("assets/fonts/Manrope-Variable.ttf") format("truetype"); font-style: normal; font-weight: 200 800; font-display: swap; }
+@font-face { font-family: "Oswald"; src: url("assets/fonts/Oswald-Variable.ttf") format("truetype"); font-style: normal; font-weight: 200 700; font-display: swap; }
+@font-face { font-family: "DM Mono"; src: url("assets/fonts/DMMono-Regular.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: "DM Mono"; src: url("assets/fonts/DMMono-Medium.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
 
 .privacy-page { width:min(100% - 36px, 800px); margin:0 auto; padding:64px 0 96px; font-size:18px; line-height:1.6; }
 .privacy-page h1 { margin:18px 0 10px; font-size:clamp(34px, 5vw, 58px); line-height:1.02; }
