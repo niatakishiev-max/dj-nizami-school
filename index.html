@@ -103,9 +103,23 @@
           <a class="button button-secondary" href="#directions">Смотреть направления</a>
         </div>
       </div>
-      <figure class="hero-portrait">
-        <img src="assets/portrait-dj-nizami.jpg" alt="DJ Nizami за диджейским оборудованием">
-        
+      <figure class="hero-portrait hero-carousel" aria-label="Фотографии DJ Nizami за работой" tabindex="0">
+        <div class="hero-carousel-track">
+          <img class="hero-slide is-active" src="assets/hero-dj-nizami-01.png" alt="DJ Nizami выступает за проигрывателями" fetchpriority="high">
+          <img class="hero-slide" src="assets/hero-dj-nizami-02.png" alt="DJ Nizami за диджейским оборудованием" loading="lazy" aria-hidden="true">
+          <img class="hero-slide" src="assets/hero-dj-nizami-03.png" alt="DJ Nizami выступает на фестивале" loading="lazy" aria-hidden="true">
+          <img class="hero-slide" src="assets/hero-dj-nizami-04.png" alt="DJ Nizami играет винил перед аудиторией" loading="lazy" aria-hidden="true">
+        </div>
+        <div class="hero-carousel-controls" aria-label="Управление фотографиями">
+          <button class="hero-carousel-button" type="button" data-carousel-previous aria-label="Предыдущее фото">&larr;</button>
+          <div class="hero-carousel-dots">
+            <button class="hero-carousel-dot is-active" type="button" data-carousel-slide="0" aria-label="Показать фото 1" aria-pressed="true"></button>
+            <button class="hero-carousel-dot" type="button" data-carousel-slide="1" aria-label="Показать фото 2" aria-pressed="false"></button>
+            <button class="hero-carousel-dot" type="button" data-carousel-slide="2" aria-label="Показать фото 3" aria-pressed="false"></button>
+            <button class="hero-carousel-dot" type="button" data-carousel-slide="3" aria-label="Показать фото 4" aria-pressed="false"></button>
+          </div>
+          <button class="hero-carousel-button" type="button" data-carousel-next aria-label="Следующее фото">&rarr;</button>
+        </div>
       </figure>
     </section>
 

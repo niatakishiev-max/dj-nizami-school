@@ -80,3 +80,46 @@ revealItems.forEach((item) => observer.observe(item));
 const backToTop = document.querySelector('.back-to-top');
 window.addEventListener('scroll', () => backToTop.classList.toggle('is-visible', window.scrollY > 500), { passive: true });
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+const carousel = document.querySelector('.hero-carousel');
+if (carousel) {
+  const slides = Array.from(carousel.querySelectorAll('.hero-slide'));
+  const dots = Array.from(carousel.querySelectorAll('[data-carousel-slide]'));
+  const previous = carousel.querySelector('[data-carousel-previous]');
+  const next = carousel.querySelector('[data-carousel-next]');
+  let activeIndex = 0;
+  let touchStartX = 0;
+
+  const showSlide = (index) => {
+    activeIndex = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === activeIndex;
+      slide.classList.toggle('is-active', isActive);
+      slide.setAttribute('aria-hidden', String(!isActive));
+    });
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === activeIndex;
+      dot.classList.toggle('is-active', isActive);
+      dot.setAttribute('aria-pressed', String(isActive));
+    });
+  };
+
+  previous.addEventListener('click', () => showSlide(activeIndex - 1));
+  next.addEventListener('click', () => showSlide(activeIndex + 1));
+  dots.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index)));
+
+  carousel.addEventListener('keydown', (event) => {
+    if (event.target !== carousel) return;
+    if (event.key === 'ArrowLeft') showSlide(activeIndex - 1);
+    if (event.key === 'ArrowRight') showSlide(activeIndex + 1);
+  });
+
+  carousel.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
+  carousel.addEventListener('touchend', (event) => {
+    const distance = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(distance) < 45) return;
+    showSlide(activeIndex + (distance < 0 ? 1 : -1));
+  }, { passive: true });
+}
