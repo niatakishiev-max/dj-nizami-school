@@ -121,14 +121,14 @@ footer { min-height:96px; display:flex; flex-wrap:wrap; align-items:center; gap:
 .site-header .brand img { display:block; width:100%; height:auto; max-width:100%; object-fit:initial; object-position:initial; }
 @media (max-width:800px) { .site-header .brand { width:245px; height:auto; } }
 /* Manual hero carousel: no automatic slide changes. */
-.hero-carousel { isolation:isolate; background:#e9e9e2; }
+.hero-carousel { isolation:isolate; overflow:hidden; background:#f4f4ef; }
 .hero-carousel-track { position:absolute; inset:0; }
 .hero-carousel .hero-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; filter:none; opacity:0; transform:scale(1.025); transition:opacity .32s ease, transform .5s ease; }
 .hero-carousel .hero-slide.is-active { opacity:1; transform:scale(1); }
 .hero-carousel-controls { position:absolute; inset:auto 14px 14px; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:12px; }
 .hero-carousel-button { width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; padding:0; border:1px solid rgba(17,17,15,.72); border-radius:50%; background:rgba(255,255,255,.9); color:#11110f; font-size:23px; line-height:1; }
 .hero-carousel-button:hover { background:#11110f; color:#ffffff; }
-.hero-carousel-dots { display:flex; align-items:center; justify-content:center; gap:7px; }
-.hero-carousel-dot { width:9px; height:9px; padding:0; border:1px solid rgba(17,17,15,.85); border-radius:50%; background:rgba(255,255,255,.9); }
-.hero-carousel-dot.is-active { background:#11110f; transform:scale(1.15); }
-@media (max-width:800px) { .hero-carousel-controls { inset:auto 12px 12px; }.hero-carousel-button { width:44px; height:44px; } .hero-carousel-dot { width:10px; height:10px; } }
+.hero-carousel-dots { display:flex; align-items:center; justify-content:center; gap:2px; }
+.hero-carousel-dot { width:5px; height:5px; box-sizing:content-box; padding:8px; border:0; border-radius:50%; background:rgba(255,255,255,.72); background-clip:content-box; }
+.hero-carousel-dot.is-active { background:#11110f; transform:scale(1.1); }
+@media (max-width:800px) { .hero-carousel-controls { inset:auto 12px 12px; }.hero-carousel-button { width:44px; height:44px; } .hero-carousel-dot { width:6px; height:6px; padding:8px; } }

@@ -104,9 +104,38 @@ if (carousel) {
     });
   };
 
-  previous.addEventListener('click', () => showSlide(activeIndex - 1));
-  next.addEventListener('click', () => showSlide(activeIndex + 1));
-  dots.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index)));
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let autoplayTimer = null;
+
+  const stopAutoplay = () => {
+    if (autoplayTimer !== null) {
+      window.clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  };
+
+  const startAutoplay = () => {
+    if (reducedMotion.matches || slides.length < 2 || autoplayTimer !== null) return;
+    autoplayTimer = window.setInterval(() => showSlide(activeIndex + 1), 2000);
+  };
+
+  const restartAutoplay = () => {
+    stopAutoplay();
+    startAutoplay();
+  };
+
+  previous.addEventListener('click', () => {
+    showSlide(activeIndex - 1);
+    restartAutoplay();
+  });
+  next.addEventListener('click', () => {
+    showSlide(activeIndex + 1);
+    restartAutoplay();
+  });
+  dots.forEach((dot, index) => dot.addEventListener('click', () => {
+    showSlide(index);
+    restartAutoplay();
+  }));
 
   carousel.addEventListener('keydown', (event) => {
     if (event.target !== carousel) return;
@@ -121,5 +150,19 @@ if (carousel) {
     const distance = event.changedTouches[0].clientX - touchStartX;
     if (Math.abs(distance) < 45) return;
     showSlide(activeIndex + (distance < 0 ? 1 : -1));
+    restartAutoplay();
   }, { passive: true });
+
+  carousel.addEventListener('pointerenter', stopAutoplay);
+  carousel.addEventListener('pointerleave', startAutoplay);
+  carousel.addEventListener('focusin', stopAutoplay);
+  carousel.addEventListener('focusout', (event) => {
+    if (!carousel.contains(event.relatedTarget)) startAutoplay();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAutoplay();
+    else startAutoplay();
+  });
+  reducedMotion.addEventListener('change', restartAutoplay);
+  startAutoplay();
 }
