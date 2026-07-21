@@ -23,13 +23,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Deploy via FTPS
+      - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: server172.hosting.reg.ru
           username: ${{ secrets.REG_FTP_USERNAME }}
           password: ${{ secrets.REG_FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftp
           port: 21
           local-dir: ./
           server-dir: ./
