@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# One canonical URL for visitors and search engines.
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^djnizami\.ru$ [NC]
+RewriteRule ^ https://djnizami.ru%{REQUEST_URI} [R=301,L]
