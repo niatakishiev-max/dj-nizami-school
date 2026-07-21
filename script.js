@@ -84,11 +84,9 @@ backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 's
 const carousel = document.querySelector('.hero-carousel');
 if (carousel) {
   const slides = Array.from(carousel.querySelectorAll('.hero-slide'));
-  const dots = Array.from(carousel.querySelectorAll('[data-carousel-slide]'));
-  const previous = carousel.querySelector('[data-carousel-previous]');
-  const next = carousel.querySelector('[data-carousel-next]');
   let activeIndex = 0;
   let touchStartX = 0;
+  let skipNextClick = false;
 
   const showSlide = (index) => {
     activeIndex = (index + slides.length) % slides.length;
@@ -96,11 +94,6 @@ if (carousel) {
       const isActive = slideIndex === activeIndex;
       slide.classList.toggle('is-active', isActive);
       slide.setAttribute('aria-hidden', String(!isActive));
-    });
-    dots.forEach((dot, dotIndex) => {
-      const isActive = dotIndex === activeIndex;
-      dot.classList.toggle('is-active', isActive);
-      dot.setAttribute('aria-pressed', String(isActive));
     });
   };
 
@@ -123,19 +116,14 @@ if (carousel) {
     stopAutoplay();
     startAutoplay();
   };
-
-  previous.addEventListener('click', () => {
-    showSlide(activeIndex - 1);
-    restartAutoplay();
-  });
-  next.addEventListener('click', () => {
+  carousel.addEventListener('click', () => {
+    if (skipNextClick) {
+      skipNextClick = false;
+      return;
+    }
     showSlide(activeIndex + 1);
     restartAutoplay();
   });
-  dots.forEach((dot, index) => dot.addEventListener('click', () => {
-    showSlide(index);
-    restartAutoplay();
-  }));
 
   carousel.addEventListener('keydown', (event) => {
     if (event.target !== carousel) return;
@@ -149,6 +137,7 @@ if (carousel) {
   carousel.addEventListener('touchend', (event) => {
     const distance = event.changedTouches[0].clientX - touchStartX;
     if (Math.abs(distance) < 45) return;
+    skipNextClick = true;
     showSlide(activeIndex + (distance < 0 ? 1 : -1));
     restartAutoplay();
   }, { passive: true });
